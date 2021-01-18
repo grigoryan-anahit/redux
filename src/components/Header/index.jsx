@@ -11,7 +11,7 @@ const Header=({isNav,toggleNavOpen})=>{
     return (
         <header className={style.header}>
             <div className={style.logoBlock}>
-                <img src="https://img2.freepng.ru/20180212/kkq/kisspng-cafe-logo-restaurant-coffee-house-logo-vector-5a81718b398aa2.2858583815184326512357.jpg" alt="logo" />
+                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/drink-cup-coffee-logo-design-template-801acb7d7238c767384d1283cc539be1_screen.jpg?ts=1594478075" alt="logo" />
             </div>
             <div className={isNav?`${style.burger} ${style.open}`:style.burger} onClick={toggleNavOpen}> 
              <i className={classes.join(' ')} ></i>

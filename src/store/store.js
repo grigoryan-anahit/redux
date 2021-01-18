@@ -1,4 +1,4 @@
-import { logRoles } from '@testing-library/react';
+import { v4 as uuidv4} from 'uuid';
 import {renderComponentsTree} from '../index';
 
 const store={
@@ -47,6 +47,23 @@ const store={
                
                break;
         }
+            case 'addPost':{
+                const posts=[...this.state.postsPage.posts];
+                posts.push(
+                    {
+                        id:uuidv4(),
+                        title:action.title,
+                        body:action.body,
+                    }
+                )
+                this.setState({
+                    ...this.state,
+                    postsPage:{
+                        posts:posts
+                    }
+                })
+                break;
+            }
        
            default: break;
        }

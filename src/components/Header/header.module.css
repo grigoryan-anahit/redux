@@ -4,8 +4,9 @@
    padding: 10px 50px;
 }
 .logoBlock>img{
-    width: 80px;
+    width: 100px;
     height: auto;
+    border-radius: 50%;
 }
 .burger{
     position: fixed;

@@ -4,6 +4,6 @@
     position: fixed;
     top: 0;
     opacity: .7;
-    background-color: dimgrey;
+    background-color: hsl(28, 30%, 83%);
     z-index: 1;
 }
