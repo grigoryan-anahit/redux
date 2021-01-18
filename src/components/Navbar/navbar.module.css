@@ -1,0 +1,34 @@
+.navbar{
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    right: -300px;
+    background-image:url('https://image.shutterstock.com/image-photo/brown-gradient-abstract-background-paper-260nw-1492170098.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+    transition: .4s;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar.open{
+    right: 2px;
+    transition: .4s;
+}
+.nav_List{
+    list-style: none;
+}
+.nav_link{
+    font-size: 20px;
+    color: brown;
+    text-decoration: none;
+}
+.nav_link.active{
+   color:white;
+   background-color: chocolate;
+}
+.nav_item:not(:first-child){
+    margin-top: 10px;
+}

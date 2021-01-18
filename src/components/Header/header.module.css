@@ -1,0 +1,21 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+   padding: 10px 50px;
+}
+.logoBlock>img{
+    width: 80px;
+    height: auto;
+}
+.burger{
+    position: fixed;
+    top: 4%;
+    right: 3%;
+    cursor: pointer;
+    transition: .4s;
+    z-index: 3;
+}
+.burger.open{
+    right: 17%;
+    transition: .4s;
+}
