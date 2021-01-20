@@ -1,14 +1,12 @@
 import Style from './posts.module.css';
 import React, { useRef } from 'react';
 import {dispatch} from "../../store/store";
+import Post from "./post";
 
 const Posts =({posts})=>{
     const Posts=posts.map(post=>{
         return(
-             <div className={Style.post} key={post.id}>
-                    <h4>{post.title}</h4>
-                    <p>{post.body}</p>
-                </div>
+             <Post post={post} />
         )
     })
     const titleRef=useRef();

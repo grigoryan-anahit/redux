@@ -5,21 +5,24 @@ const store={
     state:{
         navbar:{
             isNav:false,
-        },   
+        }, 
+        modal:{
+            isModalOpen:false
+        },  
         postsPage:{
             posts:[
                 {
-                    id:'post1',
+                    id:uuidv4(),
                     title:'About Cappuchino ',
                     body: ' lorem lorem lorem lorem lorem lorem'
                },
                 {
-                    id:'post2',
+                    id:uuidv4(),
                     title:'About Espresso ',
                     body: ' lorem lorem lorem lorem lorem lorem'
                },
               {
-                    id:'post3',
+                    id:uuidv4(),
                     title:'About NesCafe ',
                     body: ' lorem lorem lorem lorem lorem lorem'
              }
@@ -60,6 +63,38 @@ const store={
                     ...this.state,
                     postsPage:{
                         posts:posts
+                    }
+                })
+                break;
+            }
+            case 'deletePost':{
+                let posts=[...this.state.postsPage.posts];
+               posts=posts.filter(item=>item.id!==action.id);
+                this.setState({
+                    ...this.state,
+                    postsPage:{
+                        posts
+                    }
+
+                })
+                break;
+            }
+            case 'openModal':{
+                this.setState({
+                    ...this.state,
+                    modal:{
+                        ...this.state.modal,
+                        isModalOpen:true
+                    }
+                })
+                break;
+            }
+            case 'closeModal':{
+                this.setState({
+                    ...this.state,
+                    modal:{
+                        ...this.state.modal,
+                        isModalOpen:false
                     }
                 })
                 break;

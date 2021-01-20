@@ -7,6 +7,7 @@ import {dispatch} from './store/store'
 import {Route} from "react-router-dom";
 import Home from "./pages/home";
 import Posts from "./pages/posts";
+import Modal from "./components/modal";
 
 const navbarItems=[
   {
@@ -33,17 +34,19 @@ class App extends React.Component{
     // })
     const {isNav}=this.props.state.navbar;
     const {posts}=this.props.state.postsPage;
+    const {isModalOpen}=this.props.state.modal;
        return (
     <div className="App">
      <Navbar isNav={isNav}
           navbarItems={navbarItems}
      />
-     <Header  isNav={isNav}  toggleNavOpen={()=>dispatch({type:'toggleNavOpen'})} />
+     <Header  isNav={isNav}   />
+     {isModalOpen &&  <Modal />}
      
      <Route path="/" component={Home} exact="true" />
      <Route path="/posts" render={()=><Posts posts={posts} />} />
 
-     {isNav && <BackDrop   toggleNavOpen={()=>dispatch({type:'toggleNavOpen'})}/>}
+     {isNav && <BackDrop  />}
     
     </div>
   );
