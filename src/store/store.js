@@ -9,7 +9,7 @@ const store={
         modal:{
             isModalOpen:false
         },  
-        postsPage:{
+        postPage:{
             posts:[
                 {
                     id:uuidv4(),
@@ -51,7 +51,7 @@ const store={
                break;
         }
             case 'addPost':{
-                const posts=[...this.state.postsPage.posts];
+                const posts=[...this.state.postPage.posts];
                 posts.push(
                     {
                         id:uuidv4(),
@@ -61,18 +61,18 @@ const store={
                 )
                 this.setState({
                     ...this.state,
-                    postsPage:{
+                    postPage:{
                         posts:posts
                     }
                 })
                 break;
             }
             case 'deletePost':{
-                let posts=[...this.state.postsPage.posts];
+                let posts=[...this.state.postPage.posts];
                posts=posts.filter(item=>item.id!==action.id);
                 this.setState({
                     ...this.state,
-                    postsPage:{
+                    postPage:{
                         posts
                     }
 
@@ -88,7 +88,7 @@ const store={
                 // }
                 if(!action.post) 
                     return;
-                    let posts=[...this.state.postsPage.posts];
+                    let posts=[...this.state.postPage.posts];
                 // posts = posts.filter(post => post.id !== action.post.id);
                 // posts.push(action.post);
           

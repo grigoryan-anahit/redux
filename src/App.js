@@ -6,6 +6,7 @@ import BackDrop from "./components/BackDrop";
 import {Route} from "react-router-dom";
 import Home from "./pages/home";
 import Posts from "./pages/posts";
+import './store/redux-store';
 
 
 const navbarItems=[
@@ -35,7 +36,7 @@ class App extends React.Component{
       
     // })
     const {isNav}=this.props.state.navbar;
-    const {posts}=this.props.state.postsPage;
+    const { posts } = this.props.state.postPage;
     const {isModalOpen}=this.props.state.modal;
        return (
     <div className="App" ref={this.appRef}>

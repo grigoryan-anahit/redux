@@ -1,11 +1,12 @@
-import Style from './posts.module.css';
-import React from 'react';
-import { dispatch } from "../../store/store";
-import Post from "./post";
+import style from './posts.module.css';
+import React, { Component } from 'react';
+import Post from './post';
+import { dispatch } from '../../store/store';
 import Modal from '../../components/modal';
 import EditPage from './editPage';
 
-class Posts extends React.Component {
+
+class Posts extends Component {
     state = {
         inputs: {
             title: {
@@ -31,7 +32,7 @@ class Posts extends React.Component {
                 valid: true,
                 value: ''
             }
-        }
+        },
     }
 
     handleChange = (e) => {
@@ -40,10 +41,10 @@ class Posts extends React.Component {
         let whichForm = null;
         if (inputFor === 'newPost') {
             whichForm = 'inputs'
-        }
-        else if (inputFor === 'editPost') {
+        } else if (inputFor === 'editPost') {
             whichForm = 'editInputs'
         }
+
         this.setState(prevState => ({
             ...prevState,
             [whichForm]: {
@@ -55,19 +56,29 @@ class Posts extends React.Component {
                 }
             }
         }))
+
     }
 
-    handleEditPost = (e, id) => {
-      
+    setEditablePost = (editPost) => {
+        this.setState({
+            editablePost: editPost
+        }, () => {
+            dispatch({ type: 'openModal' })
+        })
+
+
+
+    }
+    handleEditPost = (e ,id) => {
         e.preventDefault();
         const updatedPost = {
             id,
-            title: this.state.editInputs.title.value,
-            body: this.state.editInputs.body.value
+            title:this.state.editInputs.title.value,
+            body:this.state.editInputs.body.value
         }
         dispatch({ type: 'updatePost', post: updatedPost })
+        dispatch({type:'closeModal'})
     }
-
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -98,67 +109,56 @@ class Posts extends React.Component {
         }))
     }
 
-    setEditablePost = (editPost) => {
-        this.setState({
-            editablePost:editPost
-        }, ()=>{
-            dispatch({ type: 'openModal' })
-        }
-        )
-    }
-   
-      
     render() {
-        console.log('render');
         const { posts, isModalOpen } = this.props;
         const Posts = posts.map(post => {
             return (
-                <Post post={post} key={post.id} setEditablePost={this.setEditablePost}
-                />  
+                <Post key={post.id}
+                    post={post}
+                    setEditablePost={this.setEditablePost}
+                />
             )
         })
-
 
         return (
             <>
                 <div>
                     <h1>Posts Page</h1>
-                    <form action="#" className={Style.addPostForm}>
-                        <input className={Style.addPostFormComp}
+                    <form action="#" className={style.addPostForm}>
+                        <input
+                            data-input="newPost"
                             type="text"
                             name="title"
-                            placeholder="enter the title of your post"
-                            data-input='newPost'
+                            placeholder="Post Title"
+                            onChange={this.handleChange}
                             value={this.state.inputs.title.value}
-                            onChange={this.handleChange}
                         />
-
-                        <textarea className={Style.addPostFormComp}
-                            type="text"
-                            name='body'
+                        <textarea
+                            data-input="newPost"
+                            name="body"
+                            cols="20"
                             rows="10"
-                            style={{ resize: 'none' }}
-                            placeholder="enter the body of your post"
-                            data-input='newPost'
-                            value={this.state.inputs.body.value}
+                            style={{ resize: "none" }}
+                            placeholder="Post Message"
                             onChange={this.handleChange}
+                            value={this.state.inputs.body.value}
                         />
-
-
-                        <button className={Style.addPostFormComp} type="submit" onClick={this.handleSubmit}>Add</button>
+                        <button type="submit" onClick={this.handleSubmit}>Add Post</button>
                     </form>
-                    <div className={Style.postsWrapper}>
+                    <div className={style.postsWrapper}>
                         {Posts}
                     </div>
                 </div>
+
                 {
                     this.state.editablePost &&
                     isModalOpen && <Modal>
-                        <EditPage post={this.state.editablePost} handleChange={this.handleChange} handleEditPost={this.handleEditPost}/>
+                        <EditPage post={this.state.editablePost} handleChange={this.handleChange}  handleEditPost={this.handleEditPost}/>
                     </Modal>
                 }
             </>
         )
     }
 }
+
 export default Posts;
