@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import store from './store/store';
-import {dispatch} from './store/store';
+
 import { BrowserRouter as Router} from 'react-router-dom';
 window.store=store;
 
 export const renderComponentsTree=()=>{
-  ReactDOM.render(
+  return ReactDOM.render(
   <React.StrictMode>
     <Router>
-    <App  state={store.state} toggleNavOpen={()=>dispatch({type:'toggleNavOpen'})} />
+    <App  state={store.state}  />
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,4 +1,5 @@
 import style from './header.module.css';
+import {dispatch} from '../../store/store';
 
 const Header=({isNav,toggleNavOpen})=>{
     const classes=['fa'];
@@ -13,7 +14,7 @@ const Header=({isNav,toggleNavOpen})=>{
             <div className={style.logoBlock}>
                 <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/drink-cup-coffee-logo-design-template-801acb7d7238c767384d1283cc539be1_screen.jpg?ts=1594478075" alt="logo" />
             </div>
-            <div className={isNav?`${style.burger} ${style.open}`:style.burger} onClick={toggleNavOpen}> 
+            <div className={isNav?`${style.burger} ${style.open}`:style.burger} onClick={()=>dispatch({type:'toggleNavOpen'})}> 
              <i className={classes.join(' ')} ></i>
             </div>
 

@@ -9,7 +9,7 @@ const Navbar=({isNav,navbarItems})=>{
 
     const navLinks=navbarItems.map(item=>{
         return (
-            <li className={style.nav_item}> 
+            <li className={style.nav_item} key={item.title+Math.random().toString()}> 
             <NavLink
                    to={item.path}
                    className={style.nav_link}

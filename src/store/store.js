@@ -30,7 +30,7 @@ const store={
         }
    },
    getState(){
-       return this.setState;
+       return this.state;
    },
    setState(newState){
      this.state=newState;
@@ -76,6 +76,30 @@ const store={
                         posts
                     }
 
+                })
+                break;
+            }
+            case 'updatePost': {
+              
+                // {
+                //     id:1,
+                //     title:sdksdp,
+                //     body:'sdfdfd'
+                // }
+                if(!action.post) 
+                    return;
+                    let posts=[...this.state.postsPage.posts];
+                // posts = posts.filter(post => post.id !== action.post.id);
+                // posts.push(action.post);
+          
+                const idx = posts.findIndex(post => post.id === action.post.id);
+                posts.splice(idx, 1, action.post);
+                console.log(posts);
+                this.setState({
+                    ...this.state,
+                    postPage: {
+                        posts
+                    }
                 })
                 break;
             }
