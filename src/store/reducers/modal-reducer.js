@@ -14,7 +14,7 @@ const ModalReducer=(state=initialState, action)=>{
     }
     case 'closeModal':{
         return {
-            state,
+            ...state,
             isModalOpen:false
             }
         }

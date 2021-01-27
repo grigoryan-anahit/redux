@@ -1,9 +1,10 @@
 import style from './backdrop.module.css';
-import {dispatch} from '../../store/store'
 
-const BackDrop=()=>{
+
+const BackDrop=({toggleNavOpen})=>{
+    
     return (
-        <div className={style.backDrop} onClick={()=>dispatch({type:'toggleNavOpen'})}>
+        <div className={style.backDrop} onClick={toggleNavOpen}>
 
         </div>
     )

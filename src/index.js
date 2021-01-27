@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import store from './store/store';
+import store from './store/redux-store';
+import {Provider} from 'react-redux';
 import { BrowserRouter as Router} from 'react-router-dom';
 
 
@@ -10,7 +11,9 @@ export const renderComponentsTree=()=>{
   return ReactDOM.render(
   <React.StrictMode>
     <Router>
-    <App  state={store.state}  />
+      <Provider store={store}>
+    <App    />
+    </Provider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,6 +1,6 @@
 import style from './editPage.module.css';
 
-const EditPage = ({ post, handleChange  ,handleEditPost}) => {
+const EditPage = ({ data:{id,title,body}, handleChange  ,handleEditPost}) => {
 
    
     return (
@@ -12,6 +12,7 @@ const EditPage = ({ post, handleChange  ,handleEditPost}) => {
                     placeholder="Post a new Title"
                     data-input="editPost"
                   onChange={handleChange}
+                  value={title}
                 />
                 <textarea
                     name="body"
@@ -21,8 +22,9 @@ const EditPage = ({ post, handleChange  ,handleEditPost}) => {
                     placeholder="Post a new Message"
                     data-input="editPost"
                     onChange={handleChange}
+                    value={body}
                 />
-                <button type="submit"   onClick={(e)=>handleEditPost(e,post.id)}>Save</button>
+                <button type="submit"   onClick={(e)=>handleEditPost(e,id)}>Save</button>
             </form>
         </div>
     )

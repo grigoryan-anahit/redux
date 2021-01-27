@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import style from './modal.module.css';
-import {dispatch} from '../../store/store';
+
 
 class Modal extends React.Component {
     state = {
@@ -14,9 +14,10 @@ class Modal extends React.Component {
         document.body.removeChild(this.state.newPortal);
     }
     render() {
+        const {closeModal}=this.props;
         return ReactDOM.createPortal(
             <div className={style.modal}>
-                <i className={`fa fa-times ${style.closeModal}`} onClick={() => dispatch({ type: 'closeModal' })}></i>
+                <i className={`fa fa-times ${style.closeModal}`} onClick={() => closeModal()}></i>
                 <div className={style.showInfo}>
                    {this.props.children}
                 </div>

@@ -8,8 +8,8 @@ const NavReducer=(state=initialState,action)=>{
     switch (action.type) {
         case 'toggleNavOpen':{
                 return  {
-                    state,
-                   isNav:!this.state.navbar.isNav
+                    ...state,
+                   isNav:!state.isNav
                 }
             }
             default:return state;

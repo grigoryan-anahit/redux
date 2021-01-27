@@ -1,7 +1,7 @@
 import style from './posts.module.css';
 import React, { Component } from 'react';
 import Post from './post';
-import { dispatch } from '../../store/store';
+import {connect} from 'react-redux';
 import Modal from '../../components/modal';
 import EditPage from './editPage';
 
@@ -20,7 +20,7 @@ class Posts extends Component {
                 value: ''
             }
         },
-        editablePost: null,
+       
         editInputs: {
             title: {
                 touched: false,
@@ -60,40 +60,66 @@ class Posts extends Component {
     }
 
     setEditablePost = (editPost) => {
-        this.setState({
-            editablePost: editPost
-        }, () => {
-            dispatch({ type: 'openModal' })
-        })
-
-
-
-    }
+        const {openModal}=this.props;
+      this.setState(prevState=>{
+          return {
+              ...prevState,
+              editInputs:{
+                  ...prevState.editInputs,
+                   id:editPost.id,
+                   title:{
+                       ...this.state.editInputs.title,
+                       value:editPost.title
+                   },
+                   body:{
+                       ...this.state.editInputs.body,
+                       value:editPost.body
+                   }
+              }
+            }
+          }, ()=>{
+              openModal();
+          
+      })
+        }
     handleEditPost = (e ,id) => {
+        const {updatePost,closeModal}=this.props;
         e.preventDefault();
         const updatedPost = {
             id,
             title:this.state.editInputs.title.value,
             body:this.state.editInputs.body.value
         }
-        dispatch({ type: 'updatePost', post: updatedPost })
-        dispatch({type:'closeModal'})
+       updatePost(updatedPost);
+       closeModal();
+        this.setState(prevState=>{
+            return {
+                ...prevState,
+                editInputs:{
+                    id:'',
+                    title:{
+                        ...this.state.editInputs.title,
+                        value:''
+                    },
+                    body:{
+                        ...this.state.editInputs.body,
+                        value:''
+                    }
+                }
+            }
+        })
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         const { title, body } = this.state.inputs
+        const {addPost}=this.props;
         if (
             title.value.length < 1 ||
             body.value.length < 1
-        ) return;
+        ) return 
+            addPost(title.value,body.value);
 
-        const action = {
-            type: 'addPost',
-            title: title.value,
-            body: body.value
-        }
-        dispatch(action);
         this.setState(prevState => ({
             ...prevState,
             inputs: {
@@ -110,12 +136,13 @@ class Posts extends Component {
     }
 
     render() {
-        const { posts, isModalOpen } = this.props;
+        const { posts, isModalOpen ,deletePost, closeModal} = this.props;
         const Posts = posts.map(post => {
             return (
                 <Post key={post.id}
                     post={post}
                     setEditablePost={this.setEditablePost}
+                    deletePost={deletePost}
                 />
             )
         })
@@ -151,14 +178,38 @@ class Posts extends Component {
                 </div>
 
                 {
-                    this.state.editablePost &&
-                    isModalOpen && <Modal>
-                        <EditPage post={this.state.editablePost} handleChange={this.handleChange}  handleEditPost={this.handleEditPost}/>
+                    this.state.editInputs.id &&
+                    isModalOpen && <Modal closeModal={closeModal}>
+                        <EditPage
+                                data={{
+                                    title:this.state.editInputs.title.value,
+                                    body: this.state.editInputs.body.value,
+                                    id: this.state.editInputs.id
+                                }} 
+                                 handleChange={this.handleChange} 
+                                  handleEditPost={this.handleEditPost}
+                            />
                     </Modal>
                 }
             </>
         )
     }
 }
+const mapStateToProps=(state)=>{
+    return {
+        posts:state.postsState.posts,
+        isModalOpen:state.modalState.isModalOpen
+    }
+}
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        addPost:(title,body)=>dispatch({type:'addPost',title:title,body:body}),
+        deletePost:(id)=>dispatch({type:' deletePost',id:id}),
+        openModal:()=>dispatch({type:'openModal'}),
+        closeModal:()=>dispatch({type:'closeModal'}),
+        updatePost:(post)=>dispatch({type:'updatePost', post:post})
+    }
+}
+const PostContainer=connect(mapStateToProps,mapDispatchToProps)(Posts);
 
-export default Posts;
+export default PostContainer;
