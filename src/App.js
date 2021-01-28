@@ -8,6 +8,7 @@ import Home from "./pages/home";
 import Posts from "./pages/posts";
 import {connect} from 'react-redux';
 import './store/redux-store';
+import {toggleNavOpenAC} from './store/actionCreators';
 
 
 const navbarItems=[
@@ -67,7 +68,7 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleNavOpen: () => dispatch({ type: 'toggleNavOpen' })
+    toggleNavOpen: () => dispatch(toggleNavOpenAC())
   }
 }
 

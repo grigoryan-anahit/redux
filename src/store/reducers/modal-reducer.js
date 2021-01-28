@@ -1,3 +1,4 @@
+import { OPEN_MODAL, CLOSE_MODAL} from '../actionTypes';
 
 const initialState={
     isModalOpen:false
@@ -5,14 +6,14 @@ const initialState={
 
 const ModalReducer=(state=initialState, action)=>{
     switch (action.type) {
-      case 'openModal':{
+      case OPEN_MODAL:{
         return {
             state, 
             isModalOpen:true
         }
            
     }
-    case 'closeModal':{
+    case CLOSE_MODAL:{
         return {
             ...state,
             isModalOpen:false

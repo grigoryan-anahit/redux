@@ -4,7 +4,9 @@ import Post from './post';
 import {connect} from 'react-redux';
 import Modal from '../../components/modal';
 import EditPage from './editPage';
-
+import Preloader from '../../components/preloader';
+//actionCreators
+import {updatePostAC,setPostAC,deletePostAC,addPostAC,openModalAC,closeModalAC}  from '../../store/actionCreators';
 
 class Posts extends Component {
     state = {
@@ -33,6 +35,15 @@ class Posts extends Component {
                 value: ''
             }
         },
+    }
+
+    componentDidMount(){
+        const {setPost}=this.props;
+       (async function getPost(){
+            const response=await fetch('https://jsonplaceholder.typicode.com/posts');
+            const data=await response.json();
+           setPost(data);
+        })();
     }
 
     handleChange = (e) => {
@@ -136,7 +147,9 @@ class Posts extends Component {
     }
 
     render() {
+       
         const { posts, isModalOpen ,deletePost, closeModal} = this.props;
+        if(!posts.length)  return <Preloader />;
         const Posts = posts.map(post => {
             return (
                 <Post key={post.id}
@@ -202,12 +215,13 @@ const mapStateToProps=(state)=>{
     }
 }
 const mapDispatchToProps=(dispatch)=>{
-    return{
-        addPost:(title,body)=>dispatch({type:'addPost',title:title,body:body}),
-        deletePost:(id)=>dispatch({type:' deletePost',id:id}),
-        openModal:()=>dispatch({type:'openModal'}),
-        closeModal:()=>dispatch({type:'closeModal'}),
-        updatePost:(post)=>dispatch({type:'updatePost', post:post})
+    return {
+        addPost:(title,body)=>dispatch(addPostAC(title,body)),
+        deletePost:(id)=>dispatch(deletePostAC(id)),
+        openModal:()=>dispatch(openModalAC()),
+        closeModal:()=>dispatch(closeModalAC()),
+        updatePost:(post)=>dispatch(updatePostAC(post)),
+        setPost:(posts)=>dispatch(setPostAC(posts))
     }
 }
 const PostContainer=connect(mapStateToProps,mapDispatchToProps)(Posts);

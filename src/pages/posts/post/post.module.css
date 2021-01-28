@@ -5,6 +5,8 @@
     border:1ps solid black;
     border-radius: 5px;
     background-color: rgb(83, 39, 18);
+    margin-top: 10px;
+    margin-right: 10px;
 }
 .post>i{
     width: 20px;

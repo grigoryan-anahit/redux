@@ -1,4 +1,4 @@
-
+import {TOGGLE_NAV_OPEN} from '../actionTypes';
 
 const initialState={
     isNav:false
@@ -6,7 +6,7 @@ const initialState={
 }
 const NavReducer=(state=initialState,action)=>{
     switch (action.type) {
-        case 'toggleNavOpen':{
+        case TOGGLE_NAV_OPEN:{
                 return  {
                     ...state,
                    isNav:!state.isNav

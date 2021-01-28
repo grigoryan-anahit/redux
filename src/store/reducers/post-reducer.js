@@ -1,29 +1,20 @@
 import { v4 as uuidv4} from 'uuid';
+import { ADD_POST,UPDATE_POST,SET_POST,DELETE_POST} from '../actionTypes';
 
 const initialState={
-    posts:[
-        {
-            id:uuidv4(),
-            title:'About Cappuchino ',
-            body: ' lorem lorem lorem lorem lorem lorem'
-       },
-        {
-            id:uuidv4(),
-            title:'About Espresso ',
-            body: ' lorem lorem lorem lorem lorem lorem'
-       },
-      {
-            id:uuidv4(),
-            title:'About NesCafe ',
-            body: ' lorem lorem lorem lorem lorem lorem'
-     }
-    ]
+    posts:[]
 }
 
 const PostsReducer=(state=initialState, action)=>{
     switch (action.type) {
-       
-         case 'addPost':{
+         case SET_POST:{
+             const {posts}=action;
+             return {
+                 ...state,
+                 posts
+             }
+         }
+         case ADD_POST:{
              const posts=[...state.posts];
            
              posts.push(
@@ -40,7 +31,7 @@ const PostsReducer=(state=initialState, action)=>{
                   }
             
          }
-         case 'deletePost':{
+         case DELETE_POST:{
          
             let posts = [...state.posts]; 
              console.log('ok');
@@ -54,7 +45,7 @@ const PostsReducer=(state=initialState, action)=>{
             }    
             
          }
-         case 'updatePost': {
+         case UPDATE_POST: {
            
              // {
              //     id:1,
