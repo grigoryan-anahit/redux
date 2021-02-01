@@ -1,33 +1,36 @@
 import style from './editPage.module.css';
+import {reduxForm,Field} from 'redux-form';
 
-const EditPage = ({ data:{id,title,body}, handleChange  ,handleEditPost}) => {
-
-   
-    return (
-        <div className={style.editPage}>
-            <form action="" className={style.Pform}>
-                <input
+const EditPage = ( props) => {
+     return (
+            <form action="" className={style.Pform} onSubmit={props.handleSubmit}>
+                <Field
                     type="text"
                     name="title"
                     placeholder="Post a new Title"
                     data-input="editPost"
-                  onChange={handleChange}
-                  value={title}
+                    component='input' 
+                    initialValues='lll'
                 />
-                <textarea
+                <Field
                     name="body"
                     cols="20"
                     rows="5"
                     style={{ resize: "none" }}
                     placeholder="Post a new Message"
                     data-input="editPost"
-                    onChange={handleChange}
-                    value={body}
+                    component='textarea'
+                    initialValues='ggg'
                 />
-                <button type="submit"   onClick={(e)=>handleEditPost(e,id)}>Save</button>
+                <button type="submit" >Save</button>
             </form>
-        </div>
+       
     )
 }
+const EditPostForm=reduxForm({
+    form:'editPost'
+   
+    
+}) (EditPage)
 
-export default EditPage
+export default EditPostForm;

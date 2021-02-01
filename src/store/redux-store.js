@@ -1,4 +1,6 @@
-import {createStore, combineReducers} from "redux"; 
+import {createStore, combineReducers, applyMiddleware} from "redux"; 
+import thunk from 'redux-thunk';
+import {reducer as formReducer} from 'redux-form';
 import PostsReducer from './reducers/post-reducer';
 import NavReducer from './reducers/nav-reducer';
 import ModalReducer from './reducers/modal-reducer';
@@ -6,10 +8,11 @@ import ModalReducer from './reducers/modal-reducer';
 const reducers=combineReducers({
     postsState:PostsReducer,
     navState:NavReducer,
-    modalState:ModalReducer
+    modalState:ModalReducer,
+    form:formReducer
 })
-
-const store = createStore(reducers);
+const middleWares=[thunk];
+const store = createStore(reducers,applyMiddleware(...middleWares));
 window.store=store;
 //store.dispatch({})
 //store.getState()
