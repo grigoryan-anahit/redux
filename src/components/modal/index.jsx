@@ -13,13 +13,16 @@ class Modal extends React.Component {
     componentWillUnmount() {
         document.body.removeChild(this.state.newPortal);
     }
+    handleClose = () => {
+        this.props.closeModal();
+    }
     render() {
-        const {closeModal}=this.props;
+
         return ReactDOM.createPortal(
             <div className={style.modal}>
-                <i className={`fa fa-times ${style.closeModal}`} onClick={() => closeModal()}></i>
+                <i className={`fa fa-times ${style.closeModal}`} onClick={this.handleClose}></i>
                 <div className={style.showInfo}>
-                   {this.props.children}
+                    {this.props.children}
                 </div>
 
             </div>,
