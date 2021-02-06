@@ -1,0 +1,33 @@
+.navbar {
+    width:250px;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    right:-250px;
+    background-color: rgb(66, 18, 62);
+    transition: .4s;
+    z-index:2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar.open {
+    right: 0px;
+    transition: .4s;
+}
+.nav_list {
+    list-style: none;
+
+}
+.nav_link {
+    font-size: 20px;
+    color:white;
+    text-decoration: none;
+
+}
+.nav_item:not(:first-child) {
+    margin-top: 10px;
+}
+.nav_link.active {
+    color:rgb(238, 216, 156);
+}

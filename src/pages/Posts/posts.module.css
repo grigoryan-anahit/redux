@@ -1,0 +1,65 @@
+.postsWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width:70%;
+    margin:0 auto;
+    margin-top: 50px;
+}
+.post {
+    position: relative;
+    padding:15px 20px;
+    border:1px solid black;
+    border-radius: 5px;
+    background-color: rgb(140, 52, 167);
+    height:200px;
+
+}
+.post>i{
+    width:20px;
+    height: 20px;
+    position: absolute;
+    cursor: pointer;
+    right:5px;
+}
+.timesIcon {
+    top:5px; 
+}
+.pancilIcon {
+    bottom: 5px;
+
+}
+.post>h4 {
+    color:white;
+    font-size: 25px;
+    font-weight: bold;
+}
+.post>p {
+    color:white;
+    font-size: 16px;
+    text-align: center;
+}
+.addPostForm {
+    margin-top: 15px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.editPage {
+    width:100%;
+  
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    border:1px solid black;
+    padding:25px;
+}
+@media only screen and (max-width:1200px) {
+    .addPostForm {
+        width:90%;
+    }
+}
